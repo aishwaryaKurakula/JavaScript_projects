@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --dark-pink: #C2185B;
+  --mid-pink: #E91E8C;
+  --light-pink: #F48FB1;
+  --baby-pink: #FCE4EC;
+  --blush: #FFF0F5;
+  --soft-rose: #F8BBD9;
+  --accent: #FF4081;
+  --text-dark: #880E4F;
+  --text-mid: #AD1457;
+  --white: #FFFFFF;
+  --shadow-pink: rgba(194, 24, 91, 0.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD9 40%, #F48FB1 100%);
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Floating particles */
+#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#particles::before,
+#particles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  animation: floatBubble 8s ease-in-out infinite;
+}
+
+#particles::before {
+  width: 300px; height: 300px;
+  background: rgba(255, 255, 255, 0.15);
+  top: -80px; left: -80px;
+  animation-delay: 0s;
+}
+
+#particles::after {
+  width: 200px; height: 200px;
+  background: rgba(255, 64, 129, 0.12);
+  bottom: -60px; right: -60px;
+  animation-delay: 4s;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 20px) scale(0.95); }
+}
+
+/* Main card */
+.box {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  border: 1.5px solid rgba(244, 143, 177, 0.4);
+  box-shadow:
+    0 8px 40px rgba(194, 24, 91, 0.15),
+    0 2px 8px rgba(233, 30, 140, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  padding: 0;
+  width: 420px;
+  max-width: 95vw;
+  overflow: hidden;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Header */
+.qr-header {
+  background: linear-gradient(135deg, var(--dark-pink) 0%, var(--mid-pink) 60%, var(--light-pink) 100%);
+  padding: 28px 32px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.qr-header::before {
+  content: '🌸';
+  position: absolute;
+  font-size: 60px;
+  opacity: 0.12;
+  top: -10px; left: -10px;
+  transform: rotate(-20deg);
+  animation: spin 20s linear infinite;
+}
+
+.qr-header::after {
+  content: '🌸';
+  position: absolute;
+  font-size: 50px;
+  opacity: 0.1;
+  bottom: -10px; right: 0;
+  transform: rotate(15deg);
+  animation: spin 25s linear infinite reverse;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.qr-header h1 {
+  font-family: 'Mochiy Pop One', sans-serif;
+  font-size: 26px;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(136, 14, 79, 0.3);
+}
+
+.qr-header h1::after {
+  content: ' 🌸';
+}
+
+/* Body */
+.qr-body {
+  padding: 28px 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Text input */
+#qr-text {
+  width: 100%;
+  padding: 13px 18px;
+  border: 2px solid var(--soft-rose);
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: var(--blush);
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+#qr-text::placeholder {
+  color: var(--light-pink);
+  font-weight: 600;
+}
+
+#qr-text:focus {
+  border-color: var(--dark-pink);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Select wrapper */
+.qr-body > div:has(label) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+label[for="sizes"] {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+#sizes {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid var(--soft-rose);
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: var(--blush);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C2185B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  transition: all 0.25s ease;
+}
+
+#sizes:focus {
+  border-color: var(--dark-pink);
+  background-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1);
+}
+
+#sizes:hover {
+  border-color: var(--mid-pink);
+}
+
+/* QR container */
+#qrContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  background: var(--blush);
+  border-radius: 16px;
+  border: 2px dashed var(--soft-rose);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#qrContainer:empty::after {
+  content: '✨ Your QR code will appear here';
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--light-pink);
+  text-align: center;
+}
+
+#qrContainer img,
+#qrContainer canvas {
+  border-radius: 0px;
+  max-width: 100%;
+  animation: fadeInQR 0.4s ease both;
+}
+
+@keyframes fadeInQR {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#qrContainer:not(:empty) {
+  border-style: solid;
+  border-color: var(--soft-rose);
+  background: var(--white);
+  padding: 16px;
+}
+
+/* Footer */
+.qr-footer {
+  padding: 0 32px 28px;
+}
+
+#downloadBtn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--dark-pink) 0%, var(--mid-pink) 100%);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 16px rgba(194, 24, 91, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+#downloadBtn::before {
+  content: '';
+}
+
+#downloadBtn::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+#downloadBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(194, 24, 91, 0.45);
+}
+
+#downloadBtn:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+#downloadBtn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--baby-pink); }
+::-webkit-scrollbar-thumb { background: var(--light-pink); border-radius: 10px; }
